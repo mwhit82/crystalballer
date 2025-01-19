@@ -29,9 +29,48 @@
 		7F97062E2D3DB36D00A7902A /* crystalballerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = crystalballerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7F9706932D3DB89700A7902A /* Exceptions for "crystalballer" folder in "crystalballerTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/Match.swift,
+				Models/Prediction.swift,
+				Networking/APIClient.swift,
+				ViewModels/MatchViewModel.swift,
+				ViewModels/PredictionViewModel.swift,
+				Views/ContentView.swift,
+				Views/DateSelectionView.swift,
+				Views/MatchList.swift,
+				Views/PredictionCard.swift,
+				Views/PredictionView.swift,
+			);
+			target = 7F9706232D3DB36D00A7902A /* crystalballerTests */;
+		};
+		7F9706942D3DB89700A7902A /* Exceptions for "crystalballer" folder in "crystalballerUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/Match.swift,
+				Models/Prediction.swift,
+				Networking/APIClient.swift,
+				ViewModels/MatchViewModel.swift,
+				ViewModels/PredictionViewModel.swift,
+				Views/ContentView.swift,
+				Views/DateSelectionView.swift,
+				Views/MatchList.swift,
+				Views/PredictionCard.swift,
+				Views/PredictionView.swift,
+			);
+			target = 7F97062D2D3DB36D00A7902A /* crystalballerUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7F9706162D3DB36C00A7902A /* crystalballer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7F9706932D3DB89700A7902A /* Exceptions for "crystalballer" folder in "crystalballerTests" target */,
+				7F9706942D3DB89700A7902A /* Exceptions for "crystalballer" folder in "crystalballerUITests" target */,
+			);
 			path = crystalballer;
 			sourceTree = "<group>";
 		};
