@@ -1,83 +1,72 @@
 import SwiftUI
 
 struct PredictionCard: View {
-    let prediction: Prediction?
+    let prediction: Prediction
     
     var body: some View {
         VStack(spacing: 16) {
-            if let prediction = prediction {
-                // Win probabilities
-                HStack {
-                    ProbabilityBar(label: "Home Win", probability: prediction.homeWinProbability)
-                    ProbabilityBar(label: "Draw", probability: prediction.drawProbability)
-                    ProbabilityBar(label: "Away Win", probability: prediction.awayWinProbability)
-                }
-                .padding()
-                
-                // Predicted score
-                Text("Predicted Score: \(prediction.predictedScore)")
+            Text("Match Prediction")
+                .font(.headline)
+            
+            // Predicted Score
+            VStack(spacing: 8) {
+                Text("Predicted Score")
+                    .font(.subheadline)
+                Text(prediction.predictedScore)
+                    .font(.title)
+                    .fontWeight(.bold)
+            }
+            
+            // Win Probabilities
+            HStack(spacing: 20) {
+                ProbabilityView(label: "Home Win", probability: prediction.homeWinProbability)
+                ProbabilityView(label: "Draw", probability: prediction.drawProbability)
+                ProbabilityView(label: "Away Win", probability: prediction.awayWinProbability)
+            }
+            
+            // Confidence Level
+            VStack(spacing: 4) {
+                Text("Confidence Level")
+                    .font(.subheadline)
+                Text("\(prediction.confidence)%")
                     .font(.title3)
+                    .fontWeight(.semibold)
+            }
+            
+            // Key Factors
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Key Factors")
+                    .font(.subheadline)
                 
-                // Confidence
-                Text("Confidence: \(prediction.confidence)%")
-                    .foregroundColor(.secondary)
-                
-                // Key factors
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Key Factors:")
-                        .font(.headline)
-                    ForEach(prediction.keyFactors, id: \.self) { factor in
-                        Text("• \(factor)")
-                            .foregroundColor(.secondary)
+                ForEach(prediction.keyFactors, id: \.self) { factor in
+                    HStack {
+                        Image(systemName: "circle.fill")
+                            .font(.system(size: 6))
+                        Text(factor)
+                            .font(.caption)
                     }
                 }
-                .padding()
             }
         }
-        .frame(maxWidth: .infinity)
         .padding()
-        .background(Color(.systemBackground))
+        .background(Color(.secondarySystemBackground))
         .cornerRadius(12)
-        .shadow(radius: 5)
     }
 }
 
-struct ProbabilityBar: View {
+private struct ProbabilityView: View {
     let label: String
     let probability: Double
     
     var body: some View {
-        VStack {
-            ZStack(alignment: .bottom) {
-                Rectangle()
-                    .frame(width: 30, height: 100)
-                    .foregroundColor(.gray.opacity(0.2))
-                
-                Rectangle()
-                    .frame(width: 30, height: 100 * probability)
-                    .foregroundColor(.blue)
-            }
-            .cornerRadius(8)
-            
+        VStack(spacing: 4) {
             Text(label)
                 .font(.caption)
-                .multilineTextAlignment(.center)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             
             Text("\(Int(probability * 100))%")
-                .font(.caption2)
-                .foregroundColor(.secondary)
+                .font(.headline)
         }
     }
-}
-
-#Preview {
-    PredictionCard(prediction: Prediction(
-        homeWinProbability: 0.6,
-        drawProbability: 0.25,
-        awayWinProbability: 0.15,
-        predictedScore: "2-1",
-        confidence: 75,
-        keyFactors: ["Recent form", "Head-to-head record"]
-    ))
-    .padding()
 }
